@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true rajeshgoyalg/react-in-container npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-3"
+  app: "react-in-container"
+  env: "ReactInContainer-env"
+  bucket_name: "elasticbeanstalk-eu-west-3-491174357260"
+  bucket_path: "react-in-container"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
